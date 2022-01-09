@@ -4,9 +4,6 @@ import HomeScreen from '../screens/HomeScreen';
 import GameScreen from '../screens/gameScreen';
 import LeadersBoard from '../screens/leaderBoard';
 
-
-
-
 const routes = {
     Home: {
         screen: HomeScreen,
@@ -23,10 +20,10 @@ const routes = {
     }
 }
 const stackOptions = {
-    // headerMode: 'none',
-    // navigationOptions: {
-    //     headerVisible: false,
-    // },
+    headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
+    },
     initialRouteName: 'Home'
 }
 

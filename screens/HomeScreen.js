@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import React, { Component, useState } from 'react';
+import { View, Text, StyleSheet, ImageBackground, Modal} from 'react-native';
 import { Button } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import EnterNameModal from '../components/enterNameModal';
 
 
 const styles = StyleSheet.create({
@@ -37,10 +39,27 @@ const styles = StyleSheet.create({
 
 
 export default HomeScreen = ({ navigation }) => {
+    const [modal, setModal] = useState(false);
+    const [username, setUsername] = useState('');
    
+    const start = () =>{
+        navigation.navigate('Game');
+        setModal(false);
+    }
 
-    const nav = (target) => {
-        console.log('supposed to go to ',target);
+    const enterName = () =>{
+        setModal(true);
+    }
+    
+
+
+    const nav = async (target) => {
+        try{
+           await AsyncStorage.setItem('first_target',target);
+        }catch(e){
+            console.log('saving error ',e);
+        }
+        console.log('navigating to ',target);
         navigation.navigate(target);
     }
 
@@ -49,9 +68,10 @@ export default HomeScreen = ({ navigation }) => {
            
             <Text style={styles.title}>Simon-Says</Text>
              <View style={styles.menu}>
-            <Button  onPress={()=>nav('Game')} ><Text style={styles.menuButton}>Start</Text></Button>
+            <Button  onPress={()=>enterName()} ><Text style={styles.menuButton}>Start</Text></Button>
             <Button   onPress={()=>nav('LeadersBoard')}><Text style={styles.menuButton}>leaderBoard</Text></Button>
             </View>
+            {modal && <EnterNameModal visible={modal} setModal={setModal} navigate={start}/>}
         </ImageBackground>
     </View>);
 

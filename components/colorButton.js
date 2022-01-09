@@ -1,12 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Pressable, View, TouchableOpacity, Text } from 'react-native';
 import { Button } from 'react-native-paper';
+import Sound from "react-native-sound";
+
 
 
 
 
 const ColorButton = ({ buttonColor, onClick, flash, userTurn }) => {
     const [ringing, setRinging] = useState(false);
+    Sound.setCategory('Playback');
+
+    async function loadRing(color){
+        let routes = {
+            red: 'ring1.mp3',
+            blue: 'ring2.wav',
+            yellow: 'ring3.wav',
+            green: 'ring4.m4a'
+        }
+         let sound =  new  Sound(routes[color],Sound.MAIN_BUNDLE, (err)=>{
+            if(err){
+                console.log('error loading sound ',err);
+                return;
+            }
+        });
+        sound.setVolume(3);
+        sound.release();
+        setTimeout(()=>{sound.play((success)=>{
+        });},100) 
+    }
+
 
     useEffect(() => {
         if (flash) {
@@ -16,6 +39,7 @@ const ColorButton = ({ buttonColor, onClick, flash, userTurn }) => {
 
     const ring = () => {
         setRinging(true);
+        loadRing(buttonColor);
         setTimeout(() => {
             setRinging(false);
         }, 1000);

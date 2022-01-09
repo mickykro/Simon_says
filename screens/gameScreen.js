@@ -1,13 +1,25 @@
-import React from 'react';
-import { View, SafeAreaView } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, SafeAreaView, StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
 import ButtonsContainer from '../components/buttonsContainer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default GameScreen = () =>{
+
+export default GameScreen = ({navigation}) =>{
+
+    const navigate = (route)=>{
+        navigation.navigate(route);
+    }
+  
+
+   
     return (
     <SafeAreaView >
         <View style={{ backgroundColor: '#120219'}}>
-            <ButtonsContainer/>
+            <ButtonsContainer navigate={navigate}/>
+           
         </View>
     </SafeAreaView>
-    )
+    );
 }
+

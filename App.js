@@ -10,7 +10,7 @@ import React from 'react';
 import type { Node } from 'react';
 
 import {
-  useColorScheme,
+  useColorScheme, I18nManager
 } from 'react-native';
 import { Provider } from 'react-redux';
 import { store } from './store';
@@ -20,6 +20,7 @@ import {
 
 
 import Navigator from './routes/navigation';
+import EnterNameModal from './components/enterNameModal';
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -27,10 +28,10 @@ const App: () => Node = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+  I18nManager.forceRTL(true);
+  I18nManager.allowRTL(true);
   return (
-    <Provider store={store}>
       <Navigator />
-    </Provider>
   );
 
 };
