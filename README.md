@@ -1,5 +1,5 @@
-** Simon Says** 
-__ let see if you can follow simon and beat the high score! __
+* Simon Says * 
+_ _ let see if you can follow simon and beat the high score! _ _
 
 ![home screen](assets/readmeImages/HomeScreen.png)
 
